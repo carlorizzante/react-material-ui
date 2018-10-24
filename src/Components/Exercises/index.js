@@ -39,6 +39,7 @@ const Exercises = (props) => {
   } = props;
 
   const {
+    id,
     description = "Select an exercise from the list on the left.",
     title = "Welcome!"
   } = exercise;
@@ -81,21 +82,20 @@ const Exercises = (props) => {
       </Grid>
       <Grid item xs={ 12 } sm={ 6 }>
         <Paper className={ classes.Paper }>
+          <Typography variant="h4" gutterBottom>
+            { title }
+          </Typography>
           { editMode
             ? <Form
+                key={ id }
                 exercise={ exercise }
                 muscles={ muscles }
                 onEdit={ onEdit }
                 onSubmit={ onSubmit }
               />
-            : <Fragment>
-                <Typography variant="h4">
-                  { title }
-                </Typography>
-                <Typography variant="subtitle1" className={ classes.rightPane }>
-                  { description }
-                </Typography>
-              </Fragment>
+            : <Typography variant="subtitle1">
+                { description }
+              </Typography>
           }
         </Paper>
       </Grid>

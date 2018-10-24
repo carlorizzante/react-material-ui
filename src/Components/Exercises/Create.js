@@ -57,6 +57,7 @@ class Create extends Component {
         <Dialog
           open={ open }
           onClose={ this.handleToggleDialog }
+          maxWidth="sm"
         >
           <DialogTitle>
             New exercise

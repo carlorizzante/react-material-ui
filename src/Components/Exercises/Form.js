@@ -7,7 +7,7 @@ const styles = theme => ({
   TextField: {},
   formControl: {
     // margin: theme.spacing.unit,
-    minWidth: '100%'
+    // minWidth: '100%'
   },
   selectEmpty: {
     // marginTop: theme.spacing.unit * 2,
@@ -21,19 +21,21 @@ class Form extends Component {
   getInitialState() {
     const { exercise } = this.props;
     const initialState = {
-      description: '',
+      title: '',
       muscles: '',
-      title: ''
+      description: ''
     }
     return exercise ? exercise : initialState;
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { exercise } = nextProps;
-    if (exercise) this.setState({ ...exercise });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('fired');
+  //   const { exercise } = nextProps;
+  //   if (exercise) this.setState({ ...exercise });
+  // }
 
   // static getDerivedStateFromProps(nextProps) {
+  //   console.log('fired');
   //   return nextProps.exercise || null;
   // }
 
@@ -72,7 +74,10 @@ class Form extends Component {
           margin="normal"
           fullWidth
         />
-        <FormControl className={ classes.formControl }>
+        <FormControl
+          className={ classes.formControl }
+          fullWidth
+        >
           <InputLabel htmlFor="age-native-simple">Muscles</InputLabel>
           <Select
             native
@@ -104,6 +109,7 @@ class Form extends Component {
             onClick={ this.handleSubmit }
             color="primary"
             variant="contained"
+            disabled={ !title || !muscles }
           >
             { exercise ? 'Save' : 'Create' }
           </Button>
