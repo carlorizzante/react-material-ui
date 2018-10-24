@@ -3,14 +3,15 @@ import { Grid, IconButton, Paper, Typography } from '@material-ui/core';
 import { List, ListItem, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { withStyles } from '@material-ui/core';
 
 import Form from './Form';
 
-const style = {
+const styles = theme => ({
   Paper: {
     padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    // marginBottom: 10,
     height: 500,
     overflowY: 'auto'
   },
@@ -20,31 +21,13 @@ const style = {
   rightPane: {
     marginTop: 20
   }
-}
+});
 
-const ExerciseDetails = ({ exercise }) => {
-
-  const {
-    description = "Select an exercise from the list on the left.",
-    title = "Welcome!"
-  } = exercise;
-
-  return (
-    <Fragment>
-      <Typography variant="h4">
-        { title }
-      </Typography>
-      <Typography variant="subtitle1" style={ style.rightPane }>
-        { description }
-      </Typography>
-    </Fragment>
-  );
-}
-
-export default (props) => {
+const Exercises = (props) => {
 
   const {
     category,
+    classes,
     editMode,
     exercise,
     exercises,
@@ -55,15 +38,20 @@ export default (props) => {
     onSubmit
   } = props;
 
+  const {
+    description = "Select an exercise from the list on the left.",
+    title = "Welcome!"
+  } = exercise;
+
   return (
     <Grid container spacing={ 16 }>
-      <Grid item sm>
-        <Paper style={ style.Paper }>
+      <Grid item xs={ 12 } sm={ 6 }>
+        <Paper className={ classes.Paper }>
           { exercises.map(([muscles, exercises]) => (
             !category || category === muscles
             ? (
               <Fragment key={ muscles }>
-                <Typography variant="h5" style={ style.headline }>
+                <Typography variant="h5" className={ classes.headline }>
                   { muscles }
                 </Typography>
                 <List component="ul">
@@ -91,8 +79,8 @@ export default (props) => {
           )) }
         </Paper>
       </Grid>
-      <Grid item sm>
-        <Paper style={ style.Paper }>
+      <Grid item xs={ 12 } sm={ 6 }>
+        <Paper className={ classes.Paper }>
           { editMode
             ? <Form
                 exercise={ exercise }
@@ -100,10 +88,19 @@ export default (props) => {
                 onEdit={ onEdit }
                 onSubmit={ onSubmit }
               />
-            : <ExerciseDetails exercise={ exercise }/>
+            : <Fragment>
+                <Typography variant="h4">
+                  { title }
+                </Typography>
+                <Typography variant="subtitle1" className={ classes.rightPane }>
+                  { description }
+                </Typography>
+              </Fragment>
           }
         </Paper>
       </Grid>
     </Grid>
   );
 }
+
+export default withStyles(styles)(Exercises);
