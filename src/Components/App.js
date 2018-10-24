@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, withStyles } from '@material-ui/core';
 
 import { Header, Footer } from './Layouts';
 import Exercises from './Exercises';
@@ -20,6 +20,26 @@ const theme = createMuiTheme({
       dark: amber[600]
     },
     type: 'dark'
+  },
+  // spacing: {
+  //   unit: 20
+  // }
+});
+
+const styles = theme => ({
+  root: {},
+  '@global': {
+    'html, body': {}
+  },
+  wrapper: {
+    display: 'flex',
+    height: '100vh',
+    flexDirection: 'column',
+    // backgroundColor: 'teal'
+  },
+  content: {
+    flex: 1,
+    backgroundColor: 'red !important'
   }
 });
 
@@ -97,10 +117,11 @@ class App extends Component {
   render() {
     const exercises = this.getExercisesByMuscles();
     const { category, editMode, exercise } = this.state;
+    const { classes } = this.props;
 
     return (
       <MuiThemeProvider theme={ theme }>
-        <Fragment>
+        <div id="wrapper" className={ classes.wrapper }>
           <CssBaseline/>
           <Header
             onCreate={ this.handleCreateExercise }
@@ -108,6 +129,7 @@ class App extends Component {
           />
 
           <Exercises
+            className={ classes.content }
             category={ category }
             editMode={ editMode }
             exercise={ exercise }
@@ -124,10 +146,10 @@ class App extends Component {
             muscles={ muscles }
             onSelect={ this.handleSelectCategory }
           />
-        </Fragment>
+        </div>
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);

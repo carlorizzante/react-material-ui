@@ -8,18 +8,36 @@ import { withStyles } from '@material-ui/core';
 import Form from './Form';
 
 const styles = theme => ({
+  root: {
+    padding: 8,
+    flexGrow: 1,
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  },
+  panel: {
+    [theme.breakpoints.down('sm')]: {
+      // height: '50%',
+      height: 'auto',
+      // flex: 1
+      // backgroundColor: 'teal'
+    }
+  },
   Paper: {
-    padding: 20,
-    marginTop: 5,
+    // padding: 16,
+    padding: theme.spacing.unit * 2,
+    // marginTop: 5,
     // marginBottom: 10,
-    height: 500,
+    height: '100%',
+    // minHeight: '200px',
     overflowY: 'auto'
   },
   headline: {
     textTransform: 'capitalize'
   },
   rightPane: {
-    marginTop: 20
+    // marginTop: 20
   }
 });
 
@@ -45,8 +63,8 @@ const Exercises = (props) => {
   } = exercise;
 
   return (
-    <Grid container spacing={ 16 }>
-      <Grid item xs={ 12 } sm={ 6 }>
+    <Grid container spacing={ 8 } className={ classes.root }>
+      <Grid item xs={ 12 } sm={ 6 } className={ classes.panel }>
         <Paper className={ classes.Paper }>
           { exercises.map(([muscles, exercises]) => (
             !category || category === muscles
@@ -84,7 +102,7 @@ const Exercises = (props) => {
           )) }
         </Paper>
       </Grid>
-      <Grid item xs={ 12 } sm={ 6 }>
+      <Grid item xs={ 12 } sm={ 6 } className={ classes.panel }>
         <Paper className={ classes.Paper }>
           <Typography
             variant="h4"
