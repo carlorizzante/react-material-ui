@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Tab, Tabs } from '@material-ui/core';
+import { AppBar, Tab, Tabs } from '@material-ui/core';
 import { withWidth } from '@material-ui/core';
 
 const Footer = ({ category, muscles, onSelect, width }) => {
@@ -19,12 +19,12 @@ const Footer = ({ category, muscles, onSelect, width }) => {
   }
 
   return (
-    <Paper>
+    <AppBar color='primary' position='static'>
       <Tabs
         value={ index }
         onChange={ handleSelectTab }
-        indicatorColor="primary"
-        textColor="primary"
+        indicatorColor="secondary"
+        textColor="secondary"
         centered={ width !== 'xs' }
         scrollable={ width === 'xs' }
         scrollButtons="on"
@@ -34,7 +34,7 @@ const Footer = ({ category, muscles, onSelect, width }) => {
           <Tab key={ muscle } label={ muscle } />
         )) }
       </Tabs>
-    </Paper>
+    </AppBar>
   );
 }
 

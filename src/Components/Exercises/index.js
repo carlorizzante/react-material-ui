@@ -52,7 +52,11 @@ const Exercises = (props) => {
             !category || category === muscles
             ? (
               <Fragment key={ muscles }>
-                <Typography variant="h5" className={ classes.headline }>
+                <Typography
+                  variant="h5"
+                  className={ classes.headline }
+                  color='secondary'
+                >
                   { muscles }
                 </Typography>
                 <List component="ul">
@@ -64,10 +68,10 @@ const Exercises = (props) => {
                     >
                       <ListItemText primary={ title } />
                       <ListItemSecondaryAction>
-                      <IconButton aria-label="Delete">
+                      <IconButton color='secondary'>
                         <EditIcon onClick={ () => onEdit(id) }/>
                       </IconButton>
-                      <IconButton aria-label="Delete">
+                      <IconButton color='secondary'>
                         <DeleteIcon onClick={ () => onDelete(id) }/>
                       </IconButton>
                     </ListItemSecondaryAction>
@@ -82,7 +86,11 @@ const Exercises = (props) => {
       </Grid>
       <Grid item xs={ 12 } sm={ 6 }>
         <Paper className={ classes.Paper }>
-          <Typography variant="h4" gutterBottom>
+          <Typography
+            variant="h4"
+            gutterBottom
+            color='secondary'
+          >
             { title }
           </Typography>
           { editMode

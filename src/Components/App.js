@@ -1,10 +1,27 @@
 import React, { Component, Fragment } from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+
 import { Header, Footer } from './Layouts';
 import Exercises from './Exercises';
 import { muscles, exercises } from '../store.js';
 
-import './App.css';
+// import './App.css';
+
+import { indigo, blue, amber } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: indigo,
+    // secondary: amber
+    secondary: {
+      main: blue[400],
+      light: amber[200],
+      dark: amber[600]
+    },
+    type: 'dark'
+  }
+});
 
 class App extends Component {
 
@@ -82,31 +99,33 @@ class App extends Component {
     const { category, editMode, exercise } = this.state;
 
     return (
-      <Fragment>
-        <CssBaseline/>
-        <Header
-          onCreate={ this.handleCreateExercise }
-          muscles={ muscles }
-        />
+      <MuiThemeProvider theme={ theme }>
+        <Fragment>
+          <CssBaseline/>
+          <Header
+            onCreate={ this.handleCreateExercise }
+            muscles={ muscles }
+          />
 
-        <Exercises
-          category={ category }
-          editMode={ editMode }
-          exercise={ exercise }
-          exercises={ exercises }
-          muscles={ muscles }
-          onDelete={ this.handleDeleteExercise }
-          onEdit={ this.handleEditExercise }
-          onSelect={ this.handleSelectExercise }
-          onSubmit={ this.handleSaveExercise }
-        />
+          <Exercises
+            category={ category }
+            editMode={ editMode }
+            exercise={ exercise }
+            exercises={ exercises }
+            muscles={ muscles }
+            onDelete={ this.handleDeleteExercise }
+            onEdit={ this.handleEditExercise }
+            onSelect={ this.handleSelectExercise }
+            onSubmit={ this.handleSaveExercise }
+          />
 
-        <Footer
-          category={ category }
-          muscles={ muscles }
-          onSelect={ this.handleSelectCategory }
-        />
-      </Fragment>
+          <Footer
+            category={ category }
+            muscles={ muscles }
+            onSelect={ this.handleSelectCategory }
+          />
+        </Fragment>
+      </MuiThemeProvider>
     );
   }
 }
