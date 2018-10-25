@@ -1,21 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { withStyles } from '@material-ui/core';
+// import { withStyles } from '@material-ui/core';
+
+import { withContext } from '../../context';
 
 import Form from './Form';
-
-const styles = theme => ({
-  root: {},
-  TextField: {},
-  formControl: {
-    // margin: theme.spacing.unit,
-    minWidth: '100%'
-  },
-  selectEmpty: {
-    // marginTop: theme.spacing.unit * 2,
-  },
-});
 
 class Create extends Component {
 
@@ -77,4 +67,4 @@ class Create extends Component {
   }
 }
 
-export default withStyles(styles)(Create);
+export default withContext(Create);

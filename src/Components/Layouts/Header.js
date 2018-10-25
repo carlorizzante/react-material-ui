@@ -16,16 +16,13 @@ const styles = theme => ({
   },
 });
 
-const Header = ({ classes, onCreate, muscles }) => (
+const Header = ({ classes }) => (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="h5" color="inherit" className={ classes.grow }>
         Exercise Database
       </Typography>
-      <Create
-        muscles={ muscles }
-        onCreate={ onCreate }
-      />
+      <Create/>
     </Toolbar>
   </AppBar>
 )

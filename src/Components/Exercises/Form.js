@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Button, FormControl, InputLabel, Select, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';
 
@@ -104,16 +104,14 @@ class Form extends Component {
           multiline
           rows="4"
         />
-        <Fragment>
-          <Button
-            onClick={ this.handleSubmit }
-            color="primary"
-            variant="contained"
-            disabled={ !title || !muscles }
-          >
-            { exercise ? 'Save' : 'Create' }
-          </Button>
-        </Fragment>
+        <Button
+          onClick={ this.handleSubmit }
+          color="primary"
+          variant="contained"
+          disabled={ !title || !muscles }
+        >
+          { exercise ? 'Save' : 'Create' }
+        </Button>
       </form>
     );
   }

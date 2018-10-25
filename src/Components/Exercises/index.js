@@ -4,6 +4,7 @@ import { List, ListItem, ListItemText, ListItemSecondaryAction } from '@material
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core';
+import { withContext } from '../../context';
 
 import Form from './Form';
 
@@ -48,7 +49,7 @@ const Exercises = (props) => {
     classes,
     editMode,
     exercise,
-    exercises,
+    exercisesByMuscles,
     muscles,
     onDelete,
     onEdit,
@@ -66,7 +67,7 @@ const Exercises = (props) => {
     <Grid container spacing={ 8 } className={ classes.root }>
       <Grid item xs={ 12 } sm={ 6 } className={ classes.panel }>
         <Paper className={ classes.Paper }>
-          { exercises.map(([muscles, exercises]) => (
+          { exercisesByMuscles.map(([muscles, exercises]) => (
             !category || category === muscles
             ? (
               <Fragment key={ muscles }>
@@ -129,4 +130,4 @@ const Exercises = (props) => {
   );
 }
 
-export default withStyles(styles)(Exercises);
+export default withContext(withStyles(styles)(Exercises));

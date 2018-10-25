@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { CssBaseline, withStyles } from '@material-ui/core';
 
+import { Provider } from '../context';
+
 import { Header, Footer } from './Layouts';
 import Exercises from './Exercises';
 import { muscles, exercises } from '../store.js';
@@ -36,10 +38,6 @@ const styles = theme => ({
     height: '100vh',
     flexDirection: 'column',
     // backgroundColor: 'teal'
-  },
-  content: {
-    flex: 1,
-    backgroundColor: 'red !important'
   }
 });
 
@@ -114,40 +112,32 @@ class App extends Component {
     }));
   }
 
+  getContext = () => ({
+    muscles,
+    ...this.state,
+    exercisesByMuscles: this.getExercisesByMuscles(),
+    onCreate: this.handleCreateExercise,
+    onDelete: this.handleDeleteExercise,
+    onEdit: this.handleEditExercise,
+    onSelect: this.handleSelectExercise,
+    onSelectCategory: this.handleSelectCategory,
+    onSubmit: this.handleSaveExercise
+  });
+
   render() {
-    const exercises = this.getExercisesByMuscles();
-    const { category, editMode, exercise } = this.state;
     const { classes } = this.props;
 
     return (
-      <MuiThemeProvider theme={ theme }>
-        <div id="wrapper" className={ classes.wrapper }>
-          <CssBaseline/>
-          <Header
-            onCreate={ this.handleCreateExercise }
-            muscles={ muscles }
-          />
-
-          <Exercises
-            className={ classes.content }
-            category={ category }
-            editMode={ editMode }
-            exercise={ exercise }
-            exercises={ exercises }
-            muscles={ muscles }
-            onDelete={ this.handleDeleteExercise }
-            onEdit={ this.handleEditExercise }
-            onSelect={ this.handleSelectExercise }
-            onSubmit={ this.handleSaveExercise }
-          />
-
-          <Footer
-            category={ category }
-            muscles={ muscles }
-            onSelect={ this.handleSelectCategory }
-          />
-        </div>
-      </MuiThemeProvider>
+      <Provider value={ this.getContext() }>
+        <MuiThemeProvider theme={ theme }>
+          <div id="wrapper" className={ classes.wrapper }>
+            <CssBaseline/>
+            <Header/>
+            <Exercises/>            />
+            <Footer/>
+          </div>
+        </MuiThemeProvider>
+      </Provider>
     );
   }
 }
